@@ -1,0 +1,49 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Patel8sd_ContactApp.ViewModels"
+             xmlns:converters="clr-namespace:Patel8sd_ContactApp.Converters"
+             x:DataType="viewmodels:ContactDetailViewModel"
+             x:Class="Patel8sd_ContactApp.Views.ContactDetailsPage"
+             Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+
+            <!-- Display View -->
+            <VerticalStackLayout Spacing="10" IsVisible="{Binding IsEditing, Converter={StaticResource InvertedBoolConverter}}">
+                <Label Text="{Binding SelectedContact.Name}" FontSize="Title" FontAttributes="Bold" />
+                <Label Text="{Binding SelectedContact.Email}" FontSize="Subtitle" />
+                <Label Text="{Binding SelectedContact.PhoneNumber}" FontSize="Subtitle" />
+                <BoxView HeightRequest="1" Color="LightGray" />
+                <Label Text="{Binding SelectedContact.Description}" FontSize="Body" />
+            </VerticalStackLayout>
+
+            <!-- Edit View (Bonus) -->
+            <VerticalStackLayout Spacing="10" IsVisible="{Binding IsEditing}">
+                <Label Text="Name" />
+                <Entry Text="{Binding SelectedContact.Name}" />
+                <Label Text="Email" />
+                <Entry Text="{Binding SelectedContact.Email}" Keyboard="Email" />
+                <Label Text="Phone Number" />
+                <Entry Text="{Binding SelectedContact.PhoneNumber}" Keyboard="Telephone" />
+                <Label Text="Description" />
+                <Editor Text="{Binding SelectedContact.Description}" HeightRequest="120" AutoSize="Disabled" />
+            </VerticalStackLayout>
+
+            <!-- Action Buttons -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,20,0,0">
+                <Button Grid.Column="0" Text="{Binding EditButtonText}" Command="{Binding ToggleEditCommand}" />
+                <Button Grid.Column="1" Text="Save" Command="{Binding SaveChangesCommand}" IsVisible="{Binding IsEditing}" />
+            </Grid>
+
+            <Button Text="Back" Command="{Binding GoBackCommand}" HorizontalOptions="FillAndExpand" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

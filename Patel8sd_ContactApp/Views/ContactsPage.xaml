@@ -1,0 +1,41 @@
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Patel8sd_ContactApp.Models"
+             xmlns:viewmodels="clr-namespace:Patel8sd_ContactApp.ViewModels"
+             x:DataType="viewmodels:ContactsViewModel"
+             x:Class="Patel8sd_ContactApp.Views.ContactsPage"
+             Title="{Binding Title}">
+
+    <Grid RowDefinitions="*, Auto">
+        <CollectionView ItemsSource="{Binding Contacts}"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding GoToDetailsCommand}"
+                        SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+            <CollectionView.EmptyView>
+                <StackLayout Padding="20">
+                    <Label Text="No contacts found. Add one!"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           FontSize="Medium"/>
+                </StackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Contact">
+                    <Frame Padding="15" Margin="10" BorderColor="LightGray" CornerRadius="8">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" />
+                            <Label Text="{Binding Email}" FontSize="Small" TextColor="Gray" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="1" 
+                Text="Add New Contact" 
+                Command="{Binding GoToAddContactCommand}"
+                Margin="20"
+                HorizontalOptions="FillAndExpand"/>
+    </Grid>
+</ContentPage>

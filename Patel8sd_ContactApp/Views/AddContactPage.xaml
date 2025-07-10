@@ -1,0 +1,22 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Patel8sd_ContactApp.ViewModels"
+             x:DataType="viewmodels:AddContactViewModel"
+             x:Class="Patel8sd_ContactApp.Views.AddContactPage"
+             Title="{Binding Title}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="20">
+            <Label Text="Add a New Contact" FontSize="Header" HorizontalOptions="Center" />
+            <Entry Placeholder="Name" Text="{Binding Name}" />
+            <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" />
+            <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}" Keyboard="Telephone" />
+            <Editor Placeholder="Description" Text="{Binding Description}" HeightRequest="120" AutoSize="Disabled" />
+            <Button Text="Save Contact" 
+                    Command="{Binding SaveContactCommand}" 
+                    IsEnabled="{Binding IsNotBusy}"
+                    HorizontalOptions="FillAndExpand" 
+                    Margin="0,20,0,0"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

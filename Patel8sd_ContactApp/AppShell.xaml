@@ -1,0 +1,21 @@
+<Shell
+    x:Class="Patel8sd_ContactApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Patel8sd_ContactApp.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Patel8sd_ContactApp">
+
+    <TabBar>
+        <ShellContent
+            Title="Add Contact"
+            ContentTemplate="{DataTemplate views:AddContactPage}"
+            Route="AddContactPage" />
+
+        <ShellContent
+            Title="Contacts"
+            ContentTemplate="{DataTemplate views:ContactsPage}"
+            Route="ContactsPage" />
+    </TabBar>
+
+</Shell>
