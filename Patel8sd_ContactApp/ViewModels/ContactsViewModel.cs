@@ -1,8 +1,9 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using Patel8sd_ContactApp.Services;
 using Patel8sd_ContactApp.Views;
-using Contact = Patel8sd_ContactApp.Models.Contact; 
+using System.Diagnostics; 
+using Contact = Patel8sd_ContactApp.Models.Contact;
 
 namespace Patel8sd_ContactApp.ViewModels
 {
@@ -21,9 +22,14 @@ namespace Patel8sd_ContactApp.ViewModels
         [RelayCommand]
         private async Task GoToDetailsAsync(Contact contact)
         {
+            Debug.WriteLine("[ContactApp DEBUG] GoToDetailsAsync command executed.");
             if (contact == null)
+            {
+                Debug.WriteLine("[ContactApp DEBUG] Contact parameter is null.");
                 return;
+            }
 
+            Debug.WriteLine($"[ContactApp DEBUG] Navigating to details for contact: {contact.Name}");
             await Shell.Current.GoToAsync(nameof(ContactDetailsPage), true, new Dictionary<string, object>
             {
                 { "SelectedContact", contact }
