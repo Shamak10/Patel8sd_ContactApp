@@ -1,6 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Contact = Patel8sd_ContactApp.Models.Contact;
+using System.Diagnostics;
+using Contact = Patel8sd_ContactApp.Models.Contact; // Resolves ambiguity
 
 namespace Patel8sd_ContactApp.ViewModels
 {
@@ -13,12 +14,19 @@ namespace Patel8sd_ContactApp.ViewModels
         [ObservableProperty]
         private bool isEditing;
 
-        [ObservableProperty]
-        private string editButtonText = "Edit";
+   
+        private string editButtonText;
+   
+        public string EditButtonText
+        {
+            get => editButtonText;
+            set => SetProperty(ref editButtonText, value);
+        }
 
         public ContactDetailViewModel()
         {
             Title = "Contact Details";
+            EditButtonText = "Edit";
         }
 
         [RelayCommand]
@@ -26,6 +34,7 @@ namespace Patel8sd_ContactApp.ViewModels
         {
             IsEditing = !IsEditing;
             EditButtonText = IsEditing ? "Cancel" : "Edit";
+            Debug.WriteLine($"[ContactApp DEBUG] ToggleEdit executed. IsEditing: {IsEditing}");
         }
 
         [RelayCommand]
